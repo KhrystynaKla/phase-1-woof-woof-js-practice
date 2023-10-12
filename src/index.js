@@ -1,7 +1,9 @@
 const dogBar = document.querySelector('#dog-bar')
 const dogInfo = document.querySelector('#dog-info')
+const goodDogFilter = document.querySelector('#good-dog-filter')
 let puppiesInfo;
 let puppyCurrentlyDisplayed;
+let goodDogsList
 
 
 
@@ -25,7 +27,6 @@ function addPuppyNametoThelist(puppy){
 
 function addDogInfo(puppy){
     puppyCurrentlyDisplayed=puppy
-    console.log(puppy)
     dogInfo.innerHTML=''
     const img = document.createElement('img')
     const h2 = document.createElement('h2')
@@ -46,4 +47,22 @@ function addDogInfo(puppy){
         }
     })
 }
+
+goodDogFilter.addEventListener('click', () =>{
+    if (goodDogFilter.textContent==='Filter good dogs: OFF'){
+        goodDogsList = puppiesInfo.filter((dog)=> dog.isGoodDog===true)
+        dogBar.innerHTML=''
+        goodDogsList.forEach(goodDog => {
+            addPuppyNametoThelist(goodDog)
+        })
+        console.log(puppiesInfo)
+        goodDogFilter.textContent='Filter good dogs: ON'
+    } else if (goodDogFilter.textContent==='Filter good dogs: ON'){
+        dogBar.innerHTML=''
+        puppiesInfo.forEach(puppy=>{
+            addPuppyNametoThelist(puppy)
+        })
+        goodDogFilter.textContent==='Filter good dogs: OFF'
+    }
+})
 
